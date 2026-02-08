@@ -21,8 +21,7 @@ The entire infrastructure is created from scratch using Infrastructure as Code (
 
 -> Exposes them using API Gateway (HTTP API)
 
--> Uses Serverless Framework for deployment
-
+-> Uses Serverless Framework for deployment  
 -> Runs in us-east-2 (Ohio) region
 
 It includes two endpoints:
