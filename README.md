@@ -33,10 +33,10 @@ It includes two endpoints:
 -> Framework: Serverless Framework (v4)  
 -> Cloud Provider: AWS  
 -> Core Services Used:   
-  -> AWS Lambda  
-  -> AWS API Gateway (HTTP API)  
-  -> AWS CloudFormation  
-  -> AWS IAM  
+  1. AWS Lambda
+  2. AWS API Gateway (HTTP API)
+  3. AWS CloudFormation
+  4. AWS IAM  
 
 **AWS CloudWatch Logs**
 
@@ -70,7 +70,7 @@ All resources are deployed and managed using the Serverless Framework, which aut
 
   The service is deployed using the Serverless CLI.
 
-    **serverless deploy**
+    serverless deploy
 
   During deployment:
   
