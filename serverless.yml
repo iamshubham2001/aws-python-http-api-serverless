@@ -1,0 +1,29 @@
+service: aws-python-http-api-project
+
+org: techshubh        # 👈 your org (from dashboard)
+app: aws-python-http-api-project   # 👈 app name (same as dashboard or new)
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: us-east-2
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+  bye:
+    handler: handler.bye
+    events:
+      - httpApi:
+          path: /bye
+          method: get
+package:
+  individually: true
+  patterns:
+    - '!**'
+    - handler.py
