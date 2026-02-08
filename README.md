@@ -10,89 +10,105 @@ authorName: 'Serverless, Inc.'
 authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 -->
 
-# Serverless Framework Python HTTP API on AWS
+# AWS Python HTTP API – Serverless Project
 
-This template demonstrates how to make a simple HTTP API with Python running on AWS Lambda and API Gateway using the Serverless Framework.
+This project is a simple serverless HTTP API built on AWS using Python and the Serverless Framework. The goal of this project was to understand how a real-world serverless application is structured, deployed, and managed using AWS-managed services.
+The entire infrastructure is created from scratch using Infrastructure as Code (IaC) via the Serverless Framework, which internally uses AWS CloudFormation.
 
-This template does not include any kind of persistence (database). For more advanced examples, check out the [serverless/examples repository](https://github.com/serverless/examples/) which includes DynamoDB, Mongo, Fauna and other examples.
+**What this project does**
 
-## Usage
+-> Deploys Python Lambda functions on AWS
+-> Exposes them using API Gateway (HTTP API)
+-> Uses Serverless Framework for deployment
+-> Runs in us-east-2 (Ohio) region
 
-### Deployment
+It includes two endpoints:
 
-```
-serverless deploy
-```
+  / → returns a hello message
+  /bye → returns a bye message
 
-After deploying, you should see output similar to:
+**Tech Stack**
 
-```
-Deploying "aws-python-http-api" to stage "dev" (us-east-1)
+-> Language: Python 3.9
+-> Framework: Serverless Framework (v4)
+-> Cloud Provider: AWS
+-> Core Services Used:
+-> AWS Lambda
+-> AWS API Gateway (HTTP API)
+-> AWS CloudFormation
+-> AWS IAM
 
-✔ Service deployed to stack aws-python-http-api-dev (85s)
+**AWS CloudWatch Logs**
 
-endpoint: GET - https://6ewcye3q4d.execute-api.us-east-1.amazonaws.com/
-functions:
-  hello: aws-python-http-api-dev-hello (2.3 kB)
-```
+Project Structure
+aws-python-http-api-project/
+├── handler.py          # Lambda function handlers
+├── serverless.yml      # Infrastructure & service configuration
+├── README.md           # Project documentation
+├── .gitignore
 
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/).
+**Architecture Overview**
 
-### Invocation
+**Deployed Architecture**
 
-After successful deployment, you can call the created application via HTTP:
+<img width="1054" height="632" alt="image" src="https://github.com/user-attachments/assets/7b790656-3e17-4093-b5dc-3f22fb4c7164" />
 
-```
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
-```
+This project uses a simple AWS serverless architecture.
 
-Which should result in response similar to the following (removed `input` content for brevity):
+-> API Gateway receives HTTP requests from users
+-> AWS Lambda handles request processing and business logic
+-> DynamoDB is used for storing and retrieving data
+-> Amazon S3 manages object storage
+-> Amazon CloudWatch captures logs and monitors executions
+-> IAM controls access and permissions between services
+-> CloudFormation provisions and manages all infrastructure as code
+-> The response is then returned to the client through the API Gateway.
 
-```json
-{
-  "message": "Go Serverless v4.0! Your function executed successfully!"
-}
-```
+All resources are deployed and managed using the Serverless Framework, which automatically generates and applies CloudFormation stacks behind the scenes.
 
-### Local development
+**Deployment**
 
-You can invoke your function locally by using the following command:
+  The service is deployed using the Serverless CLI.
 
-```
-serverless invoke local --function hello
-```
+    **serverless deploy**
 
-Which should result in response similar to the following:
+  During deployment:
+  -> Lambda functions are packaged
+  -> CloudFormation stack is created/updated
+  -> API Gateway endpoints are provisioned
+  -> IAM roles and permissions are configured automatically
 
-```json
-{
-  "statusCode": 200,
-  "body": "{\n  \"message\": \"Go Serverless v4.0! Your function executed successfully!\"}"
-}
-```
+**API Endpoints**
 
-Alternatively, it is also possible to emulate API Gateway and Lambda locally by using `serverless-offline` plugin. In order to do that, execute the following command:
+  After deployment, the API is accessible via the generated API Gateway URL:
 
-```
-serverless plugin install -n serverless-offline
-```
+  -> GET /
+  -> GET /bye
 
-It will add the `serverless-offline` plugin to `devDependencies` in `package.json` file as well as will add it to `plugins` in `serverless.yml`.
+  The Serverless Framework provides the exact endpoint URL after deployment.
 
-After installation, you can start local emulation with:
+**Why Serverless Framework**
 
-```
-serverless offline
-```
+-> Simplifies AWS infrastructure management
+-> Reduces boilerplate CloudFormation code
+-> Handles packaging, deployment, and permissions
+-> Makes serverless development faster and more maintainable
 
-To learn more about the capabilities of `serverless-offline`, please refer to its [GitHub repository](https://github.com/dherault/serverless-offline).
 
-### Bundling dependencies
+**Why I built this**
 
-In case you would like to include 3rd party dependencies, you will need to use a plugin called `serverless-python-requirements`. You can set it up by running the following command:
+I built this project to:
+-> Get hands-on experience with AWS serverless services
+-> Understand how the Serverless Framework works internally
+-> Practice deploying real cloud resources instead of only reading docs
 
-```
-serverless plugin install -n serverless-python-requirements
-```
+**Notes**
 
-Running the above will automatically add `serverless-python-requirements` to `plugins` section in your `serverless.yml` file and add it as a `devDependency` to `package.json` file. The `package.json` file will be automatically created if it doesn't exist beforehand. Now you will be able to add your dependencies to `requirements.txt` file (`Pipfile` and `pyproject.toml` is also supported but requires additional configuration) and they will be automatically injected to Lambda package during build process. For more details about the plugin's configuration, please refer to [official documentation](https://github.com/UnitedIncome/serverless-python-requirements).
+-> This project focuses on core serverless concepts, not frontend or database integration
+-> No credentials or secrets are stored in this repository
+-> .serverless and AWS-related local files are ignored using .gitignore
+
+**Author**
+
+  **Shubham**
+  _Cloud & DevOps Enthusiast_
